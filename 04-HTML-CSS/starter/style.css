@@ -1,0 +1,29 @@
+body {
+  background-color: #39c5bb;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 20px;
+}
+
+h1 {
+  font-size: 80px;
+  color: black;
+  text-align: center;
+}
+
+.paragraph1 {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+#miku_image {
+  border: 30px solid #39c5bb;
+}
+
+input,
+button {
+  padding: 10px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+    margin: auto;
+}

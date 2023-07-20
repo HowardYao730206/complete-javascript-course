@@ -27,3 +27,40 @@ const restaurant = {
     },
   },
 };
+
+const arr = [1, 2, 3];
+//destructuring an array
+const [x, y, z] = arr;
+console.log(x, y, z);
+
+//destructuring doesn't require all variable
+//e.g:
+let [first, second, , fourth] = restaurant.categories;
+//only the first two elements of the array are taken
+console.log(first, second, fourth);
+
+//we can also just leave a 'hole' to skip the element to access:
+
+//you can simply switch the position of the elements inside an array with array deconstructuring
+[first, second] = [second, first];
+console.log(first, second);
+
+//you can have 2 return value from a function with array deconstructuring
+//e.g: return a array and immediately deconstructuring them
+
+//obtain all the elements from a nested array(2d array)
+const array = [1, 2, [3, 9]];
+const [firNum, secNum, [firNum2, secNum2]] = array;
+console.log(firNum, firNum2, secNum, secNum2);
+
+//you can also assign a default value if you don't know the number of the elements pre-ahead(so it is not 'undefined')
+//such as:
+const numArr = [1, 2];
+const [i = 1, j = 1, k = 1] = numArr;
+console.log(i, j, k);
+//so, just in case if k didn't get any value, k will be automatically set to be 1 instead of undefined
+
+//You can also deconstructuring object with javascript
+//The name must be exact match for the properties of the objects
+const { name, categories, openingHours } = restaurant;
+console.log(name, categories, openingHours);
