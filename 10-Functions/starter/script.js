@@ -26,3 +26,23 @@ const howard = {
 const checkIn = function (flight, passenger) {};
 
 checkIn(flight, howard);
+
+//A function that replace all spaces
+const oneWord = function (word) {
+  return word.replace(/ /g, '').toLowerCase(); // `/ /g stands for spaces`
+};
+
+console.log(oneWord('Hi! my name is Howard!'));
+
+const upperFirstWord = function (str) {
+  const [firstWord, ...restWords] = str.split(' ');
+  return [firstWord.toUpperCase(), ...restWords].join(' ');
+};
+
+//Higher-Order Function
+const transformer = function (str, fn) {
+  return fn(str);
+};
+
+console.log(transformer(`Javascript is the best!`, upperFirstWord));
+console.log(transformer(`Javascript is the best!`, oneWord));
