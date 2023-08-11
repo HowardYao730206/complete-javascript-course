@@ -1,30 +1,44 @@
 'use strict';
 
 // Data needed for a later exercise
-const flights =
-  '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
+/* const flights =
+  '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30'; */
+
+const weekdays = [`mon`, `tue`, `wed`, `thur`, `fri`, `sat`, `sun`];
 
 // Data needed for first part of the section
+const openingHours = {
+  thu: {
+    open: 12,
+    close: 22,
+  },
+  fri: {
+    open: 11,
+    close: 23,
+  },
+  sat: {
+    open: 0, // Open 24 hours
+    close: 24,
+  },
+  //Property name is can be dynamic and computable
+  //P.S: remember to add a square bracket
+  [weekdays[2]]: {
+    open: 8,
+    close: 20,
+  },
+};
 const restaurant = {
   name: 'Classico Italiano',
   location: 'Via Angelo Tavanti 23, Firenze, Italy',
   categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
-
-  openingHours: {
-    thu: {
-      open: 12,
-      close: 22,
-    },
-    fri: {
-      open: 11,
-      close: 23,
-    },
-    sat: {
-      open: 0, // Open 24 hours
-      close: 24,
-    },
+  //Must be the exact same object name
+  //it is now also consider a global variable and not a block-scope variable
+  openingHours,
+  //the function keyword inside a object is no longer a  requirement
+  testFunction() {
+    console.log(`Mic Test, 1, 2 `);
   },
   //settings must be inside a curly braces
   //You can also defined a default value to the argument in case if the argument is not defined at the end
@@ -34,6 +48,8 @@ const restaurant = {
     );
   },
 };
+
+restaurant.testFunction();
 
 const arr = [1, 2, 3];
 //destructuring an array
@@ -69,9 +85,10 @@ console.log(i, j, k);
 
 //You can also deconstructuring object with javascript
 //The name must be exact match for the properties of the objects
-const { name, categories, openingHours } = restaurant;
+const { name, categories } = restaurant;
 console.log(name, categories, openingHours);
 
+<<<<<<< Updated upstream
 //you can also deconstructuring a object and assigning them their own name:
 const { name: restaurantName, categories: dishes } = restaurant;
 //assigning the orginal exact name into new replaced name
@@ -221,6 +238,15 @@ for (const [key, { open, close }] of Object.entries(openingHours)) {
 //Code challenge 1 redo
 ///////////////////////////////////////
 // Coding Challenge #1
+=======
+//rest 1
+const rest1 = {
+  name: 'KFC',
+};
+
+rest1.name ||= `McDonald`; // This line of code here is equal to  rest.name = rest.name||`McDonald`
+//if, rest1.name is a falsy value, it will be set to be McDonald, otherwise the truthy value will be define
+>>>>>>> Stashed changes
 
 /* 
 We're building a football betting app (soccer for my American friends 😅)!
@@ -239,6 +265,12 @@ TEST DATA FOR 6: Use players 'Davies', 'Muller', 'Lewandowski' and 'Kimmich'. Th
 
 GOOD LUCK 😀
 */
+<<<<<<< Updated upstream
+=======
+console.log(
+  'Coding Challenge 1:--------------------------------------------------------'
+);
+>>>>>>> Stashed changes
 const game = {
   team1: 'Bayern Munich',
   team2: 'Borrussia Dortmund',
@@ -280,6 +312,7 @@ const game = {
   },
 };
 
+<<<<<<< Updated upstream
 console.log('//////////////////////////////////');
 const [players1, players2] = game.players;
 console.log(players1, players2);
@@ -368,3 +401,395 @@ for (const player of game.scored) {
 }
 
 console.log(scorers);
+=======
+const [players1, players2] = game.players;
+//If there are remaining elements, all will be take into the fieldPlayers variable
+const [gk, fieldPlayers] = game.players;
+const allPlayers = [...players1, ...players2];
+const players1Final = [...players1, 'Thiago', 'Coutinho', 'Perisic'];
+console.log(allPlayers);
+
+//const [team1,draw,team2] = game.odds;
+//if it is curly braces, write the exact property name, if not "[]", write in order
+const {
+  odds: { team1, x: draw, team2 },
+} = game;
+
+//takes in any number of parameters
+function printGoals(...players) {
+  console.log(...players);
+  //The total number of the parameters
+  console.log(`${players.length}`);
+}
+printGoals('Davies', 'Muller', 'Lewandowski', 'Kimmich');
+//doesn't print anything because there are no console.log
+team1 < team2 || console.log(`team 2 wins`);
+team2 < team1 || console.log(`team 1 wins`);
+
+//quicker way to loop all elements of a array
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+//looks like for(int variable : array) in java
+for (let item of menu) {
+  console.log(item);
+}
+//OLD SCHOOL WAY LOL
+for (let item of menu.entries()) {
+  console.log(`${item[0] + 1}: ${item[1]}`);
+}
+//Print menu.entries() like this:
+console.log([...menu.entries()]);
+// it is a 2d array contain both the element and the index of the element in the array
+
+//apply destructuring into the for-of loop
+for (let [list, item] of menu.entries()) console.log(`${list + 1}: ${item}`);
+
+console.log(restaurant.openingHours.mon); //undefined, because mon does not exist
+//console.log(restaurant.openingHours.mon.open); //error, because since mon does not exist, open is trying to read a property from undefined, which is illegal
+
+//Optional Chaining
+console.log(restaurant.openingHours.mon?.open); //now return undefined, as soon as whatever is before the question mark is undefined, the program will
+//immediately return undefined
+//Multiple Optional Chaining is allowed, it is basically multiple checkpoint
+
+for (const day of weekdays) {
+  //if we don't use the optional Chaining, the "restaurant.openingHours[day]?.open" will return error instead of undefined
+  console.log(
+    //we can also apply with condition operators so undefined does not appeared
+    //try use nulish so 0 and empty string is also account
+    `On ${day} , we open on ${restaurant.openingHours[day]?.open ?? 8}`
+  );
+  //restaurant.openingHours[day] is basically = restaurant.openingHours.mon, restaurant.openingHours.tue, and so on
+  //if we want to use variable to be our dynamic property name
+}
+
+//you need to add a dot "." to check if the the method exist or not
+console.log(restaurant.order?.(0, 1) ?? `Method does not exits`);
+
+//we can also check if an array is either empty or not
+const userName = [{ name: `Howard`, gender: `male` }];
+
+console.log(userName[2]?.name || 'Jack');
+
+//The new common datatype, set
+//set is bascially a set of element that contain unique value and does not duplicate
+
+const orderSet = new Set([`Pizza`, `Pizza`, `Pasta`, `Rice`, `Pasta`]);
+console.log(orderSet); // => [Pizza,Pasta,Rice]
+//ignore duplicate values
+
+console.log(new Set(`Howard`));
+
+console.log(orderSet.size); // = The size of the set variable
+
+console.log(orderSet.has(`Pizza`)); //check if the set contain the specific variable
+
+orderSet.add(`Tofu`); //add new elements into a set
+orderSet.delete('Rice'); //delete the existing element that was contain in that list
+console.log(orderSet);
+
+//we cannot retreive values out from a set and the most of time why we use set is when we need to know whether a certain value is existing or contained inside a set
+
+//However, we can still loop through the values from the set
+for (const order of orderSet) console.log(order);
+
+orderSet.clear(); //immediately clear all value inside the set
+
+//A usage when you want to simplify the elements
+const staff = [`Waiter`, `Waiter`, `Chef`, `Manager`, `Waiter`, `Chef`];
+const roles = [...new Set(staff)]; //Convert a new set into an array
+console.log(roles);
+console.log(`Our restaurant have total of ${new Set(staff).size} roles`);
+
+//The another datatype, compare to set, we use map
+//The map allow us to use a key to reference to a specific value
+const rest = new Map();
+console.log(rest.set(1, `Howard`)); //by set up a reference key and value, the expression can be directly print, so we can concat them
+
+//Both the key and the directed values can be any expression
+console.log(
+  rest.set(2, `Miku`).set(3, `Kaito`).set(true, `Rin`).set(false, `Len`)
+);
+
+//By enter the key, we retreive the directed value
+console.log(rest.get(1));
+
+console.log(rest.has(1)); //check if the key is contain inside the map(must be KEY)
+
+console.log(rest.delete(1)); //delete the key inside the map (must be KEY
+
+console.log(rest.size); //return the size of the map
+
+//For objects
+const tempArr = [1, 2]; //Object is not primitive type and stored in a heap
+rest.set(tempArr, `Luka`); //if we don't create a variable for the object, even if we do the same like [1,2], they are still pointed to different address to the heap
+console.log(tempArr);
+
+//we can even link the interface with value using map
+rest.set(document.querySelector('h1'), `heading`);
+
+//we can convert object properties into map:
+const hoursMap = new Map(Object.entries(openingHours));
+console.log(hoursMap);
+
+//Note, that map is also iterables
+for (const [key, value] of rest) console.log(rest.get(key)); //direct return a object contain 1 key and 1 value
+//By destructuring, we can only use the key and return the value
+
+//Convert the map back into array:
+const mapArr = [...rest];
+console.log(mapArr); //in form of 2d array that contain a key and its correspond value in each place of element
+
+console.log(rest.values());
+
+///////////////////////////////////////
+// Coding Challenge #3
+
+/* 
+Let's continue with our football betting app! This time, we have a map with a log of the events that happened during the game. The values are the events themselves, and the keys are the minutes in which each event happened (a football game has 90 minutes plus some extra time).
+
+1. Create an array 'events' of the different game events that happened (no duplicates)
+2. After the game has finished, is was found that the yellow card from minute 64 was unfair. So remove this event from the game events log.
+3. Print the following string to the console: "An event happened, on average, every 9 minutes" (keep in mind that a game has 90 minutes)
+4. Loop over the events and log them to the console, marking whether it's in the first half or second half (after 45 min) of the game, like this:
+      [FIRST HALF] 17: ⚽️ GOAL
+
+GOOD LUCK 😀
+*/
+
+const gameEvents = new Map([
+  [17, '⚽️ GOAL'],
+  [36, '🔁 Substitution'],
+  [47, '⚽️ GOAL'],
+  [61, '🔁 Substitution'],
+  [64, '🔶 Yellow card'],
+  [69, '🔴 Red card'],
+  [70, '🔁 Substitution'],
+  [72, '🔁 Substitution'],
+  [76, '⚽️ GOAL'],
+  [80, '⚽️ GOAL'],
+  [92, '🔶 Yellow card'],
+]);
+
+// const events = [...new Set(gameEvents)];
+/* console.log(gameEvents);
+const events = [...new Set(gameEvents)];
+console.log(events);
+
+const eventArr = new Set()
+for(const [time,event] of events)
+{
+  eventArr.add(event);
+}
+console.log([...eventArr]); */
+
+/* const eventsSet = new Set();
+for (const [time, events] of gameEvents) eventsSet.add(events);
+const events = [...eventsSet];
+console.log(events); */
+
+const events = [...new Set(gameEvents.values())];
+console.log(events);
+
+gameEvents.delete(64);
+console.log(gameEvents);
+
+console.log(
+  `An event happened, on average, every ${90 / gameEvents.size} minutes`
+);
+
+for (const [time, events] of gameEvents)
+  time < 45
+    ? console.log(`[FIRST HALF] ${time} : ${events}`)
+    : console.log(`[Second HALF] ${time} : ${events}`);
+
+const vocaloid = `Miku`;
+console.log(vocaloid[0]); //return the first letter from the string
+
+console.log(vocaloid.length); //you can also return the length of the string in letter
+
+console.log(vocaloid.indexOf(`u`)); //return the position of the specific letter in the string
+
+console.log(vocaloid.lastIndexOf('u')); //retrun the position of the specific letter in the string that counts backward
+
+console.log(vocaloid.indexOf(`ku`)); //by using indexOf, you can also search for a set of letters or a word
+
+//The method slice will take the input index number and print all the content of the string starting from the specific index of the string
+//The same as substring in JAVA
+console.log('Vocaloid VI Engine'.slice(9, 12));
+
+//splict word that was block by spaces:
+const engine = `Vocaloid VI Engine`;
+console.log(engine.slice(0, engine.indexOf(' ')));
+
+//if you put in a negative value for the string slice, it will count the letter from the end
+console.log(engine.slice(-6)); //count from the end : `ne`, P.S: does not start form 0
+
+console.log(engine.slice(0, -6)); //by using negative value count from the last, you are basically cutting the index from the end
+//still not start from 1 instead of 0
+
+const checkMiddleSeat = function (seat) {
+  //seat.indexOf(`B`) !== -1 || seat.indexOf(`E`) !== -1
+  seat.slice(-1) === `B` || seat.slice(-1) === `E`
+    ? console.log('Middle Seat!!! 😭')
+    : console.log(`Not a middle seat!!! Luckyyyyyyyyyyy! 🥳`);
+};
+
+checkMiddleSeat(`69F`);
+checkMiddleSeat(`19E`);
+checkMiddleSeat(`85B`);
+
+console.log(vocaloid.toLowerCase()); //Change all letters to lowercase
+console.log(vocaloid.toUpperCase()); //Change all letters to uppercase
+
+//fix wording error
+const corrctifyEmail = `howard@student.mtsac.edu`;
+const email = '     HowaRd@student.MTSAC.eDu \n';
+const trimEmail = email.toLowerCase().trim();
+console.log(trimEmail); //trim() remove all meaningless contents(space, new line)
+console.log(trimEmail === corrctifyEmail);
+
+//trimStart() only remove spaces from the begining of the string e.g: " Hello World " => "Hello World "
+//trimEnd() only remove spaces from the end of the string e.g: " Hello World " => " Hello World"
+
+const priceCN = `698,519￥`;
+const prcieUS = priceCN.replace(`￥`, `$`); //replace the first input parameter with the second parameter in the string
+console.log(prcieUS);
+//replace() only replace the first letter it met, to replace all of the letter, we use replaceAll() method
+
+console.log(vocaloid.includes(`Vocaloid`)); //return boolean type and check if the variable contain the following string.
+console.log(vocaloid.startsWith(`Vocaloid`)); //return boolean type and check if the variable start with the following string.
+console.log(vocaloid.endsWith(`Vocaloid`)); //return boolean type and check if the variable end with the following string.
+
+//split() method
+console.log(`Splict this line by spaces`.split(' ')); //split the called string by the input keyword, and store all in an array
+
+//join() method
+console.log([`Mr.`, `Howard`, `Yao`.toUpperCase()].join(' '));
+//The join method must be called by a array and a divide string in between, it will concat all elements from the array to form a new string
+
+const capName = function (name) {
+  //Change the first letter of each word to upper case and other to lower case
+  const names = name.split(' ');
+  const capArray = [];
+  for (const i of names) {
+    capArray.push(i[0].toUpperCase() + i.slice(1).toLowerCase());
+    //or
+    //capArray.push(i.replace(i[0],i[0].toUpperCase()));
+  }
+  return capArray.join(' ');
+};
+
+console.log(capName('hoWard yao'));
+
+//padding
+//padding method will fill in the character
+console.log(`Howard`.padStart(10, ' ').padEnd(14, ' '));
+
+//mask credit card
+const maskCredit = function (number) {
+  const string = number + '';
+  console.log(string.slice(-4).padStart(string.length, '*'));
+};
+
+maskCredit(1029019201);
+
+//repeat method allow us to repeat certain message (string) multiple times
+console.log('Miku LOVE!!!!'.repeat(3));
+
+///////////////////////////////////////
+// Coding Challenge #4
+
+/* 
+Write a program that receives a list of variable names written in underscore_case and convert them to camelCase.
+
+The input will come from a textarea inserted into the DOM (see code below), and conversion will happen when the button is pressed.
+
+THIS TEST DATA (pasted to textarea)
+underscore_case
+ first_name
+Some_Variable 
+  calculate_AGE
+delayed_departure
+
+SHOULD PRODUCE THIS OUTPUT (5 separate console.log outputs)
+underscoreCase      ✅
+firstName           ✅✅
+someVariable        ✅✅✅
+calculateAge        ✅✅✅✅
+delayedDeparture    ✅✅✅✅✅
+
+HINT 1: Remember which character defines a new line in the textarea 😉
+HINT 2: The solution only needs to work for a variable made out of 2 words, like a_b
+HINT 3: Start without worrying about the ✅. Tackle that only after you have the variable name conversion working 😉
+HINT 4: This challenge is difficult on purpose, so start watching the solution in case you're stuck. Then pause and continue!
+
+Afterwards, test with your own test data!
+
+GOOD LUCK 😀
+*/
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
+
+/* document.querySelector('button').addEventListener('click', function () {
+  const text = document.querySelector('textarea').value;
+  let textArr = text.split('_');
+  textArr[0] = textArr[0].toLowerCase();
+  //console.log(textArr[0]);
+  for (let i = 1; i < textArr.length; i++) {
+    textArr[i] = textArr[i][0].toUpperCase() + textArr[i].slice(1);
+  }
+
+  console.log(textArr.join(''));
+}); */
+
+const camelCase = function (word) {
+  let wordArr = word.split(`_`);
+  wordArr[0] = wordArr[0].toLowerCase();
+  for (let i = 1; i < wordArr.length; i++) {
+    wordArr[i] =
+      wordArr[i][0].toUpperCase() + wordArr[i].slice(1).toLowerCase();
+  }
+  return wordArr.join('');
+};
+
+document.querySelector('button').addEventListener('click', function () {
+  let counter = 1;
+  const text = document.querySelector('textarea').value;
+  let textArr = text.split('\n');
+  for (const i of textArr) {
+    console.log(camelCase(i).trim().padEnd(20, ' ') + '✅'.repeat(counter));
+    counter++;
+  }
+});
+
+//////////////////////////////////////
+// String Methods Practice
+
+const flights =
+  '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
+
+// 🔴 Delayed Departure from FAO to TXL (11h25)
+//              Arrival from BRU to FAO (11h45)
+//   🔴 Delayed Arrival from HEL to FAO (12h05)
+//            Departure from FAO to LIS (12h30)
+
+const handleFlights = function (info) {
+  const separateInfo = info.split(';');
+  const flightType = separateInfo[0].split('_').join(' ');
+  const flightFrom = separateInfo[1].slice(0, 3).toUpperCase();
+  const flightTo = separateInfo[2].slice(0, 3).toUpperCase();
+  const flightTime = separateInfo[3].split(':');
+
+  return `${
+    flightType.startsWith(' Delayed') ? `🔴` : ''
+  } ${flightType} from ${flightFrom} to ${flightTo} (${flightTime[0]}h${
+    flightTime[1]
+  })`;
+};
+
+//padding is = to 45
+const separateFlights = flights.split('+');
+for (const i of separateFlights) {
+  console.log(handleFlights(i).padStart(45, ' '));
+}
+>>>>>>> Stashed changes
